@@ -51,12 +51,12 @@ if [ "${CUSTOM_ENV_INTERNAL_NETWORK:-}" ]; then
 fi
 
 # Spin up the instance
-$TERRAFORM init
-$TERRAFORM apply -auto-approve
+terraform-wrapper init
+terraform-wrapper apply -auto-approve
 
 # Get its IP address and cache it in $JOB/ip. `terraform output` is actually
 # pretty expensive call.
-VM_IP=$($TERRAFORM output -json | jq -r .ip_address.value[0])
+VM_IP=$(terraform-wrapper output -json | jq -r .ip_address.value[0])
 echo "${VM_IP}" > "${JOB}/ip"
 
 # Wait for the machine.

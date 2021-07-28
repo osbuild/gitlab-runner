@@ -9,7 +9,7 @@ source "${currentDir}/base.sh"
 # we want to run as many commands as possible
 set +e
 
-$TERRAFORM destroy -auto-approve
+terraform-wrapper destroy -auto-approve
 
 # Remove the host key from known_hosts.
 VM_IP=$(cat "${JOB}/ip")
